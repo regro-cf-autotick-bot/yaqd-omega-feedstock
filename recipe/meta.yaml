@@ -1,5 +1,5 @@
 {% set name = "yaqd-omega" %}
-{% set version = "2023.10.0" %}
+{% set version = "2023.11.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,10 +7,11 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/yaqd_omega-{{ version }}.tar.gz
-  sha256: 90fe6419bf12b08034978218331b0fc8ea2c6a7cb624b049ef3fcc08c9e7a155
+  sha256: 571dacc475dae1e73602efee3c178f7a5894355d48ae4aab9b3d3aa3c3662720
 
 build:
   entry_points:
+    - yaqd-omega-d8200 = yaqd_omega._omega_d8200:OmegaD8200.main
     - yaqd-omega-platinum = yaqd_omega._omega_platinum:OmegaPlatinum.main
     - yaqd-omega-iseries-modbus = yaqd_omega._omega_iseries_modbus:OmegaIseriesModbus.main
   noarch: python
@@ -33,6 +34,7 @@ test:
     - yaqd_omega
   commands:
     - pip check
+    - yaqd-omega-d8200 --help
     - yaqd-omega-platinum --help
     - yaqd-omega-iseries-modbus --help
   requires:
