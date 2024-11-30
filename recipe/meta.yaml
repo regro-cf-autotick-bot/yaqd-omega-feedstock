@@ -6,7 +6,7 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/yaqd_omega-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/yaqd_omega-{{ version }}.tar.gz
   sha256: 571dacc475dae1e73602efee3c178f7a5894355d48ae4aab9b3d3aa3c3662720
 
 build:
@@ -16,15 +16,15 @@ build:
     - yaqd-omega-iseries-modbus = yaqd_omega._omega_iseries_modbus:OmegaIseriesModbus.main
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  number: 0
+  number: 1
 
 requirements:
   host:
-    - python >=3.7
+    - python {{ python_min }}
     - flit-core >=2,<4
     - pip
   run:
-    - python >=3.7
+    - python >={{ python_min }}
     - yaqd-core >=2020.06.3
     - minimalmodbus
     - pymodbus >=3.1
@@ -39,6 +39,7 @@ test:
     - yaqd-omega-iseries-modbus --help
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://yaq.fyi
